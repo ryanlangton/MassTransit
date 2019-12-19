@@ -101,6 +101,22 @@ IMessageDataRepository CreateRepository(string connectionString, string database
 }
 ```
 
+### Custom
+
+To store your message data in some other data store, just create an implementation for IMessageDataRepository.
+
+```cs
+IMessageDataRepository messageDataRepository = new MyCustomDataRepository();
+
+cfg.ReceiveEndpoint("document-service", e =>
+{
+    e.UseMessageData(messageDataRepository);
+
+    e.Consumer<IndexDocumentConsumer>();
+});
+```
+
+
 
 
 
